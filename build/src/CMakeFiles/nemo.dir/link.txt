@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnemo.a  CMakeFiles/nemo.dir/foo.cc.o CMakeFiles/nemo.dir/bar.cc.o CMakeFiles/nemo.dir/answer.cc.o CMakeFiles/nemo.dir/count_primes.cc.o
+/usr/bin/ranlib libnemo.a

@@ -1,0 +1,1 @@
+/usr/bin/c++   -O3 -DNDEBUG   CMakeFiles/nemo_tests.dir/run_all.cc.o CMakeFiles/nemo_tests.dir/foo_test.cc.o CMakeFiles/nemo_tests.dir/bar_test.cc.o CMakeFiles/nemo_tests.dir/answer_test.cc.o CMakeFiles/nemo_tests.dir/primes_test.cc.o  -o nemo_tests -rdynamic libgtest.a ../src/libnemo.a -lpthread 

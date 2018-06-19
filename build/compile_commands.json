@@ -1,0 +1,127 @@
+[
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/src",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_exe.dir/main.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/src/main.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/main.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/src",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo.dir/foo.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/src/foo.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/foo.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/src",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo.dir/bar.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/src/bar.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/bar.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/src",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo.dir/answer.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/src/answer.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/answer.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/src",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo.dir/count_primes.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/src/count_primes.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/count_primes.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/test",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/.  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/gtest.dir/gtest/gtest-all.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/test/gtest/gtest-all.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/gtest/gtest-all.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/test",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/.  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_tests.dir/run_all.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/test/run_all.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/run_all.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/test",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/.  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_tests.dir/foo_test.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/test/foo_test.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/foo_test.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/test",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/.  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_tests.dir/bar_test.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/test/bar_test.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/bar_test.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/test",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/.  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_tests.dir/answer_test.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/test/answer_test.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/answer_test.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/test",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/.  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_tests.dir/primes_test.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/test/primes_test.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/test/primes_test.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench",
+  "command": "/usr/bin/c++    -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include  -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/nemo_benchmark.dir/primes_bench.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/primes_bench.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/primes_bench.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/benchmark.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/benchmark.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/benchmark.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/benchmark_register.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/benchmark_register.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/benchmark_register.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/colorprint.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/colorprint.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/colorprint.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/commandlineflags.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/commandlineflags.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/commandlineflags.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/complexity.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/complexity.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/complexity.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/console_reporter.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/console_reporter.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/console_reporter.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/csv_reporter.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/csv_reporter.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/csv_reporter.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/json_reporter.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/json_reporter.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/json_reporter.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/reporter.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/reporter.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/reporter.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/sleep.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/sleep.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/sleep.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/string_util.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/string_util.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/string_util.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/sysinfo.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/sysinfo.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/sysinfo.cc"
+},
+{
+  "directory": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/build/bench/benchmark/src",
+  "command": "/usr/bin/c++   -DHAVE_POSIX_REGEX -DHAVE_STD_REGEX -DHAVE_STEADY_CLOCK -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/. -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/include -I/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src   -std=c++11 -Wall -Wextra -Wshadow -pedantic -pedantic-errors -Wfloat-equal -fstrict-aliasing -Wzero-as-null-pointer-constant -Wstrict-aliasing -O3 -DNDEBUG -Werror   -std=c++11 -o CMakeFiles/benchmark.dir/timers.cc.o -c /home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/timers.cc",
+  "file": "/home/eliad93/s18_project/cmake-gtest-gbench-starter/bench/benchmark/src/timers.cc"
+}
+]

@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/nemo/count_primes.hh
+iostream
+-
+string
+-
+cstring
+-
+experimental/string_view
+-
+vector
+-
+cmath
+-
+set
+-
+algorithm
+-
+
+/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/main.cc
+iostream
+-
+algorithm
+-
+cstdlib
+-
+nemo/count_primes.hh
+/home/eliad93/s18_project/cmake-gtest-gbench-starter/src/nemo/count_primes.hh
+
