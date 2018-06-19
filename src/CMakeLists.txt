@@ -1,0 +1,55 @@
+cmake_minimum_required(VERSION 3.0)
+project(keydomet)
+
+# Set build type to RELEASE by default:
+if (NOT CMAKE_BUILD_TYPE)
+  message(STATUS "No build type provided, default to RELEASE.")
+  set(CMAKE_BUILD_TYPE "RELEASE")
+endif ()
+
+# Options can be turned on and off by providing cmake with a -DOPTIONNAME=ON (or OFF) argument.
+# For example, to turn off benchmarks, build a shared library, and use sanitize flags in a DEBUG build:
+#    cmake .. -DCMAKE_BUILD_TYPE=DEBUG -DBuildBench=OFF -DBuildShared=ON -DSanitize=ON
+
+option(BuildBench "BuildBench" ON)
+option(BuildShared "BuildShared" OFF)
+option(Sanitize "Sanitize" OFF)
+
+if (BuildShared)
+  set(LIB_TYPE SHARED)
+else ()
+  set(LIB_TYPE STATIC)
+endif ()
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+find_package(Threads REQUIRED)
+find_package(Boost)
+find_package(Math)
+
+include_directories(. include ${Boost_INCLUDE_DIRS})
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set( CMAKE_CXX_EXTENSIONS OFF )
+
+if (Sanitize)
+  set(CMAKE_CXX_FLAGS "-fsanitize=address -fsanitize=undefined ${CMAKE_CXX_FLAGS}")
+endif ()
+
+add_subdirectory(src)
+
+if (BuildBench)
+  add_subdirectory(bench)
+endif ()
+
+message(STATUS "")
+message(STATUS "BUILD SUMMARY")
+message(STATUS "  CMAKE_GENERATOR      : ${CMAKE_GENERATOR}")
+message(STATUS "  Compiler ID          : ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS "  Build type           : ${CMAKE_BUILD_TYPE}")
+message(STATUS "  Library type         : ${LIB_TYPE}")
+message(STATUS "  Build benchmarks     : ${BuildBench}")
+message(STATUS "  Sanitize flags       : ${Sanitize}")
+message(STATUS "  Boost include dirs   : ${Boost_INCLUDE_DIRS}")
+message(STATUS "")
