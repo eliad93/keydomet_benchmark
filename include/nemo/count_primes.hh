@@ -139,8 +139,6 @@ namespace nemo {
 
     };
 
-    size_t usedPrefix = 0;
-    size_t usedStr = 0;
 
     template<class StrImp_, KeyDometSize Size_>
     class KeyDometStr
@@ -172,17 +170,14 @@ namespace nemo {
         {
             if (this->prefix != other.prefix)
             {
-                ++usedPrefix;
                 return diffAsOneOrMinusOne(this->prefix, other.prefix);
             }
             else
             {
                 if (this->prefix.stringShorterThanKeydomet())
                 {
-                    ++usedPrefix;
                     return 0;
                 }
-                ++usedStr;
                 return strcmp(getRawStr(str) + sizeof(Size_), getRawStr(other.str) + sizeof(Size_));
             }
         }

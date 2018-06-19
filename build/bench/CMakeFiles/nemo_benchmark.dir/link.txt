@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3 -DNDEBUG   CMakeFiles/nemo_benchmark.dir/primes_bench.cc.o  -o nemo_benchmark -rdynamic benchmark/src/libbenchmark.a ../src/libnemo.a -lpthread -lrt 
