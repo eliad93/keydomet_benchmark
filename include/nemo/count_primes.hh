@@ -24,6 +24,10 @@ namespace nemo {
         SIZE_128BIT = 16
     };
 
+    //constexpr auto KeyDometSizeToUse = KeyDometSize::SIZE_128BIT;
+    constexpr auto KeyDometSizeToUse = KeyDometSize::SIZE_64BIT;
+    //constexpr auto KeyDometSizeToUse = KeyDometSize::SIZE_16BIT;
+
     template<KeyDometSize>
     struct KeyDometStorage; // Unexpected KeyDometSize value!
 
@@ -44,9 +48,17 @@ namespace nemo {
         {
             return {(msbs & other.msbs), (lsbs & other.lsbs)};
         }
+        constexpr bool operator<(const kdmt128_t& other) const
+        {
+            return (msbs < other.msbs) || (msbs == other.msbs && lsbs < other.lsbs);
+        }
         constexpr bool operator==(const kdmt128_t& other) const
         {
             return (msbs == other.msbs) && (lsbs == other.lsbs);
+        }
+        constexpr bool operator!=(const kdmt128_t& other) const
+        {
+            return (msbs != other.msbs) || (lsbs != other.lsbs);
         }
     };
     template<> struct KeyDometStorage<KeyDometSize::SIZE_128BIT> { using type = kdmt128_t; };
@@ -55,18 +67,21 @@ namespace nemo {
     // Helper functions to provide access to the raw c-string array.
     // New string types should add an overload, which uses that type's API.
     //
-    const char* getRawStr(const char* str);
-    const char* getRawStr(const std::string& str);
-    const char* getRawStr(const string_view& str);
+    const char* getRawStr(const char* str) { return str; }
+    const char* getRawStr(const std::string& str) { return str.data(); }
+    const char* getRawStr(const string_view& str) { return str.data(); }
 
     //
     // Helper function for swapping bytes, turning the big endian order in the string into
     // a proper little endian number. For now, only GCC is supported due to the use of intrinsics.
     //
-    void flipBytes(uint16_t& val);
-    void flipBytes(uint32_t& val);
-    void flipBytes(uint64_t& val);
-    void flipBytes(kdmt128_t& val);
+    void flipBytes(uint16_t& val) { val = __builtin_bswap16(val); }
+    void flipBytes(uint32_t& val) { val = __builtin_bswap32(val); }
+    void flipBytes(uint64_t& val) { val = __builtin_bswap64(val); }
+    void flipBytes(kdmt128_t& val) {
+        val.lsbs = __builtin_bswap64(val.lsbs);
+        val.msbs = __builtin_bswap64(val.msbs);
+    }
 
     //
     // Helper function that turns the string's keydomet into a number.
@@ -139,6 +154,8 @@ namespace nemo {
 
     };
 
+    size_t usedPrefix = 0;
+    size_t usedStr = 0;
 
     template<class StrImp_, KeyDometSize Size_>
     class KeyDometStr
@@ -170,14 +187,17 @@ namespace nemo {
         {
             if (this->prefix != other.prefix)
             {
+                ++usedPrefix;
                 return diffAsOneOrMinusOne(this->prefix, other.prefix);
             }
             else
             {
                 if (this->prefix.stringShorterThanKeydomet())
                 {
+                    ++usedPrefix;
                     return 0;
                 }
+                ++usedStr;
                 return strcmp(getRawStr(str) + sizeof(Size_), getRawStr(other.str) + sizeof(Size_));
             }
         }
@@ -219,6 +239,14 @@ namespace nemo {
         }
 
     };
+
+    using KeyDometStr64 = KeyDometStr<std::string, KeyDometSizeToUse>;
+
+    std::ostream& operator<<(std::ostream& os, const kdmt128_t& val)
+    {
+        os << val.msbs << val.lsbs;
+        return os;
+    }
 
     template<typename StrImp, KeyDometSize Size>
     std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk)
@@ -308,15 +336,32 @@ namespace nemo {
         return KeyDometStrType{key};
     }
 
-      bool lookup(set<string>& s, const string& key);
+    string getRandStr(size_t len);
 
-string getRandStr(size_t len);
+    vector<string> getInput(size_t keysNum, size_t keyLen);
 
-vector<string> getInput(size_t keysNum, size_t keyLen);
+    template<template<class, typename...> class Container,
+        typename StrT, KeyDometSize Size, typename... ContainerArgs>
+    void buildContainer(Container<KeyDometStr<StrT, Size>, ContainerArgs...>& container, const vector<string>& input);
 
-void buildContainer(set<string>& container, const vector<string>& input);
+template<template<class, typename...> class Container,
+        typename... ContainerArgs>
+    void buildContainer(Container<string, ContainerArgs...>& container, const vector<string>& input);
 
-void stringCompare();
+#if BENCH_FOLLY
+template<template<typename> class Container>
+    void buildContainer(Container<folly::fbstring>& container, const vector<string>& input);
+#endif
+
+template<template<class, class...> class Container, class StrType, class... Args>
+    bool lookup(Container<StrType, Args...>& s, const string& key);
+
+// specialized for keydomet-ed containers, which take a keydomet for lookups
+template<template<class, class...> class Container, class... Args>
+    bool lookup(Container<KeyDometStr64, Args...>& s, const string& key);
+
+template <class Container>
+    void stringCompare(const vector<string>& input, const vector<string>& lookups);
 
 } /* end namespace nemo */
 
