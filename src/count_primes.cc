@@ -16,6 +16,30 @@
 using namespace std;
 using namespace nemo;
 
+const char* getRawStr(const char* str) { return str; }
+const char* getRawStr(const std::string& str) { return str.data(); }
+const char* getRawStr(const string_view& str) { return str.data(); }
+
+void flipBytes(uint16_t& val) { val = __builtin_bswap16(val); }
+void flipBytes(uint32_t& val) { val = __builtin_bswap32(val); }
+void flipBytes(uint64_t& val) { val = __builtin_bswap64(val); }
+void flipBytes(kdmt128_t& val) {
+	val.lsbs = __builtin_bswap64(val.lsbs);
+	val.msbs = __builtin_bswap64(val.msbs);
+}
+
+std::ostream& operator<<(std::ostream& os, const kdmt128_t& val){
+	os << val.msbs << val.lsbs;
+	return os;
+}
+
+template<typename StrImp, KeyDometSize Size>
+std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk){
+	const StrImp& str = hk.getStr();
+	os << str;
+	return os;
+}
+
 string nemo::getRandStr(size_t len)
 {
     static mt19937 gen{random_device{}()};
@@ -81,11 +105,11 @@ bool lookup(Container<KeyDometStr64, Args...>& s, const string& key)
 }
 
 
-template <class Container>
-void nemo::stringCompare(const vector<string>& input, const vector<string>& lookups){
-    Container container;
-    buildContainer(container, input);
-    for (const string& s : lookups){
-        lookup(container, s);
-    }
-}
+// template <class Container>
+// void nemo::stringCompare(const vector<string>& input, const vector<string>& lookups){
+//     Container container;
+//     buildContainer(container, input);
+//     for (const string& s : lookups){
+//         lookup(container, s);
+//     }
+// }

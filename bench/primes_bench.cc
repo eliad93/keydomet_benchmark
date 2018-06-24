@@ -13,11 +13,20 @@ using std::endl;
 
 using namespace nemo;
 
+template <class Container>
+void stringCompare(const vector<string>& input, const vector<string>& lookups){
+    Container container;
+    buildContainer(container, input);
+    for (const string& s : lookups){
+        lookup(container, s);
+    }
+}
+
 using HkSet = set<KeyDometStr64, less<>>;
 
 static void BM_StringCompare(benchmark::State& state, const size_t size, const size_t strLen) {
 	const vector<string>& input = getInput(size, strLen);
-	 const vector<string>& lookups = getInput(size, strLen);
+	const vector<string>& lookups = getInput(size, strLen);
 	while(state.KeepRunning()){
 		stringCompare<set<std::string, less<>>>(input, lookups);
 	}
@@ -25,7 +34,7 @@ static void BM_StringCompare(benchmark::State& state, const size_t size, const s
 
 static void BM_StringCompareKeydomet(benchmark::State& state, const size_t size, const size_t strLen) {
 	const vector<string>& input = getInput(size, strLen);
-	 const vector<string>& lookups = getInput(size, strLen);
+	const vector<string>& lookups = getInput(size, strLen);
 	while(state.KeepRunning()){
 		stringCompare<HkSet>(input, lookups);
 	}
