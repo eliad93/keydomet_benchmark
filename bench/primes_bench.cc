@@ -13,15 +13,6 @@ using std::endl;
 
 using namespace nemo;
 
-template <class Container>
-void stringCompare(const vector<string>& input, const vector<string>& lookups){
-    Container container;
-    buildContainer(container, input);
-    for (const string& s : lookups){
-        lookup(container, s);
-    }
-}
-
 using HkSet = set<KeyDometStr64, less<>>;
 
 static void BM_StringCompare(benchmark::State& state, const size_t size, const size_t strLen) {
