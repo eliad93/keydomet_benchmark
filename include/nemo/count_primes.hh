@@ -234,7 +234,10 @@ static void flipBytes(kdmt128_t& val) {
 
     };
 
-    using KeyDometStr64 = KeyDometStr<std::string, KeyDometSizeToUse>;
+    using KeyDometStr16 = KeyDometStr<std::string, KeyDometSize::SIZE_16BIT>;
+    using KeyDometStr32 = KeyDometStr<std::string, KeyDometSize::SIZE_32BIT>;
+    using KeyDometStr64 = KeyDometStr<std::string, KeyDometSize::SIZE_64BIT>;
+    using KeyDometStr128 = KeyDometStr<std::string, KeyDometSize::SIZE_128BIT>;
 
     std::ostream& operator<<(std::ostream& os, const kdmt128_t& val);
 
