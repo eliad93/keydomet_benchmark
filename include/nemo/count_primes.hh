@@ -332,6 +332,33 @@ std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk){
 
     vector<string> getInput(size_t keysNum, size_t keyLen);
 
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////BENCH 2////////////////////////////////////////////////////////////
+    vector<string> parseCSV_90();
+    vector<string> parseCSV_10();
+    vector<string> getInputFromData(size_t keysNum, vector<string> data);
+    vector<string> getInputFromParsedAndUnparsed(size_t keysNum);
+    /////////////////////////////////////////////////////////BENCH 2 END ////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
 template<template<class, typename...> class Container,
         typename StrT, KeyDometSize Size, typename... ContainerArgs>
 void buildContainer(Container<KeyDometStr<StrT, Size>, ContainerArgs...>& container, const vector<string>& input)
