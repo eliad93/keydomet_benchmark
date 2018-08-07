@@ -48,39 +48,6 @@ vector<string> nemo::getInput(size_t keysNum, size_t keyLen)
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-vector<string> parseCSV(){
-    vector<string> data;
-    string line;
-    ifstream infile("/home/eliad93/keydomet/keydomet_benchmark/6M_keys_+_vals.csv");
-    if(infile){
-        while(!infile.eof()){
-          getline(infile,line);
-          data.push_back(line);
-        }
-    }
-    random_shuffle(data.begin(), data.end()); // TODO: Oren is this OK for the purpose of the benchmark?
-    return data;
-    }
-
-
-vector<string> nemo::parseCSV_90(){
-    vector<string> original = parseCSV();
-    vector<string> data;
-    for(int i=0; i<original.size()*0.9; i++){
-        data.push_back(original[i]);
-    }
-    return data;
-}
-
-vector<string> nemo::parseCSV_10(){
-    vector<string> data = parseCSV();
-    int goalSize = data.size()*0.1;
-    int i = rand()%data.size();
-    while(data.size()>goalSize){
-    	data.erase(data.begin()+(i-1));
-    }
-    return data;
-}
 
 vector<string> nemo::getInputFromData(size_t keysNum, vector<string> data)
 {
@@ -97,11 +64,11 @@ vector<string> nemo::getInputFromData(size_t keysNum, vector<string> data)
 
 
 
-vector<string> nemo::getInputFromParsedAndUnparsed(size_t keysNum)
+vector<string> nemo::getInputFromParsedAndUnparsed(size_t keysNum, const string& path)
 {
     
-    vector<string> input90 = parseCSV_90();
-    vector<string> input10 = parseCSV_10();
+    vector<string> input90 = nemo::parseCSV<vector<string>>(path, 0.9);
+    vector<string> input10 = nemo::parseCSV<vector<string>>(path, 0.1);
 
     random_shuffle(input90.begin(), input90.end());
     random_shuffle(input10.begin(), input10.end());

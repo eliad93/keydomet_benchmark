@@ -9,6 +9,7 @@
 #include <cmath>
 #include <set>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -342,10 +343,28 @@ std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk){
 
 
     /////////////////////////////////////////////////////////BENCH 2////////////////////////////////////////////////////////////
-    vector<string> parseCSV_90();
-    vector<string> parseCSV_10();
     vector<string> getInputFromData(size_t keysNum, vector<string> data);
-    vector<string> getInputFromParsedAndUnparsed(size_t keysNum);
+    vector<string> getInputFromParsedAndUnparsed(size_t keysNum, const string& path);
+
+    template <class Container>
+    Container parseCSV(const string& path, double portion){
+        string line;
+        ifstream infile(path.c_str());
+        if(infile.bad()) {
+            __throw_invalid_argument("can't open file - maybe path is wrong?");
+        }
+        Container c;
+        while(!infile.eof()){
+            getline(infile,line);
+            c.push_back(line);
+        }
+        random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
+        typename Container::const_iterator first = c.begin();
+        typename Container::const_iterator last = c.begin() + (c.size()*portion);
+        Container newC(first, last);
+        random_shuffle(newC.begin(), newC.end());
+        return newC;
+    }
     /////////////////////////////////////////////////////////BENCH 2 END ////////////////////////////////////////////////////////////
 
 
