@@ -43,7 +43,14 @@ vector<string> nemo::getInput(size_t keysNum, size_t keyLen)
     return input;
 }
 
-
+vector<string> nemo::vectorCopy(vector<string> data){
+    int size = (int)data.size();
+    vector<string> input{size};
+    for(int i=0; i<size; i++){
+        input.push_back(data[i]);
+        return input; 
+    }
+}
 
 
 
@@ -86,6 +93,8 @@ vector<string> nemo::getInputFromParsedAndUnparsed(size_t keysNum, const string&
     random_shuffle(input.begin(), input.end());
     return input;
 }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 

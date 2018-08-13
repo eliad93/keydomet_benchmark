@@ -333,14 +333,7 @@ std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk){
 
     vector<string> getInput(size_t keysNum, size_t keyLen);
 
-
-
-
-
-
-
-
-
+    vector<string> vectorCopy(vector<string> data);
 
     /////////////////////////////////////////////////////////BENCH 2////////////////////////////////////////////////////////////
     vector<string> getInputFromData(size_t keysNum, vector<string> data);
@@ -431,6 +424,21 @@ void stringCompare(const vector<string>& input, const vector<string>& lookups){
     }
 }
 
+template <class Container>
+void stringCompareAndInsert(vector<string>& input, const vector<string>& lookups,int insertCount, const size_t strLen){
+    Container container;
+    int counter = 0; 
+    buildContainer(container, input);
+    for (const string& s : lookups){
+        if(counter >= insertCount){
+            input.push_back(getRandStr(strLen));
+            buildContainer(container, input);
+            counter = 0;
+        }
+        lookup(container, s);
+        counter++;
+    }
+}
 } /* end namespace nemo */
 
 #endif

@@ -84,6 +84,33 @@ static void BM_StringCompare_5050_set_keydomet_64(benchmark::State& state, const
 }
 ////////////////////////////BENCH 2 - 2 END////////////////////////////////////
 
+
+
+
+////////////////////////////BENCH 4///////////////////////////////////////////
+static void BM_StringCompareAndInsert_5050_set_string(benchmark::State& state, const size_t size, const string& path, int insertCount, const size_t strLen) {
+	const vector<string>& input = parseCSV<vector<string>>(path, 0.9);
+	const vector<string>& lookups = getInputFromParsedAndUnparsed(size, path);
+	vector<string> addAbleinput; 
+	addAbleinput = vectorCopy(input);
+	while(state.KeepRunning()){
+		stringCompareAndInsert<set<string>>(addAbleinput, lookups, insertCount,strLen);
+	}
+}
+
+static void BM_StringCompareAndInsert_5050_set_keydomet_64(benchmark::State& state, const size_t size, const string& path, int insertCount, const size_t strLen) {
+	const vector<string>& input = parseCSV<vector<string>>(path, 0.9);
+	const vector<string>& lookups = getInputFromParsedAndUnparsed(size, path);
+	vector<string> addAbleinput; 
+	addAbleinput = vectorCopy(input);
+	int counter = 0; 
+	while(state.KeepRunning()){
+		stringCompareAndInsert<set<KeyDometStr64>>(addAbleinput, lookups, insertCount,strLen);
+	}
+}
+////////////////////////////BENCH 4 - 2 END////////////////////////////////////
+
+
 const string Csv6MStringsPath = string("/home/eliad93/keydomet/keydomet_benchmark/6M_keys_+_vals.csv");
 
 
@@ -99,5 +126,7 @@ BENCHMARK_CAPTURE(BM_StringCompare_10_set_keydomet_64, test_real_str_10_set_keyd
 BENCHMARK_CAPTURE(BM_StringCompare_5050_set_string, test_real_str_5050_set_string, 1000000, Csv6MStringsPath);
 BENCHMARK_CAPTURE(BM_StringCompare_5050_set_keydomet_64, test_real_str_5050_set_keydomet64, 1000000, Csv6MStringsPath);
 
+BENCHMARK_CAPTURE(BM_StringCompareAndInsert_5050_set_string, test_real_str_with_insert_5050_set_string, 1000000, Csv6MStringsPath,100,1024);
+BENCHMARK_CAPTURE(BM_StringCompareAndInsert_5050_set_keydomet_64, test_real_str_with_insert_5050_set_keydomet64, 1000000, Csv6MStringsPath,100,1024);
 
 BENCHMARK_MAIN();
