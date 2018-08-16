@@ -439,6 +439,21 @@ void stringCompareAndInsert(vector<string>& input, const vector<string>& lookups
         counter++;
     }
 }
+
+template <class C, class T>
+void stringCompareAndInsert1(vector<string>& input, const vector<string>& lookups, int insertCount, const size_t strLen){
+    C container;
+    int counter = 0; 
+    buildContainer(container, input);
+    for (const string& s : lookups){
+        if(counter >= insertCount){
+            container.insert(T(getRandStr(strLen)));
+            counter = 0;
+        }
+        lookup(container, s);
+        counter++;
+    }
+}
 } /* end namespace nemo */
 
 #endif
