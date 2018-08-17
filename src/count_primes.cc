@@ -44,9 +44,9 @@ vector<string> nemo::getInput(size_t keysNum, size_t keyLen)
 }
 
 vector<string> nemo::vectorCopy(vector<string> data){
-    int size = (int)data.size();
+    unsigned long size = (unsigned long)data.size();
     vector<string> input{size};
-    for(int i=0; i<size; i++){
+    for(unsigned long i=0; i<size; i++){
         input.push_back(data[i]);
         return input; 
     }

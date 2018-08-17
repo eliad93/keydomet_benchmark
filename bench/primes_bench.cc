@@ -66,9 +66,10 @@ template <class C, class T> static void BM_90_percent_parsed_data_5050_parsed_un
 	const vector<string>& input = parseCSV<vector<string>>(Csv6MStringsPath, 0.9);
 	const vector<string>& lookups = getInputFromParsedAndUnparsed(state.range(0), Csv6MStringsPath);;
 	auto writes = input;
-	int readToWriteRatio = state.range(0);
+	int readToWriteRatio = state.range(1);
+	int strLen = state.range(2);
 	while(state.KeepRunning()){
-		stringCompareAndInsert1<C,T>(writes, lookups, readToWriteRatio,state.range(1));
+		stringCompareAndInsert<C,T>(writes, lookups, readToWriteRatio, strLen);
 	}
 }
 
@@ -103,25 +104,34 @@ BM_generated_string_compare<set<KeyDometStr64>>/1000000/1024 2869301162 ns 28689
 
 #define BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(func, type1, type2, args) BENCHMARK_TEMPLATE(func, type1)->Args({args[0][0], args[0][1]}); BENCHMARK_TEMPLATE(func, type2)->Args({args[0][0], args[0][1]}); \
 				BENCHMARK_TEMPLATE(func, type1)->Args({args[1][0], args[1][1]}); BENCHMARK_TEMPLATE(func, type2)->Args({args[1][0], args[1][1]}); \
-				BENCHMARK_TEMPLATE(func, type1)->Args({args[2][0], args[2][1]}); BENCHMARK_TEMPLATE(func, type2)->Args({args[2][0], args[2][1]});
+				BENCHMARK_TEMPLATE(func, type1)->Args({args[2][0], args[2][1]}); BENCHMARK_TEMPLATE(func, type2)->Args({args[2][0], args[2][1]})
 
-#define BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(func, cmp1, cmp2, type1, type2, args) BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[0][0], args[0][1]}); \
-				BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[0][0], args[0][1]}); \
-				BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[1][0], args[1][1]}); BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[1][0], args[1][1]}); \
-				BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[2][0], args[2][1]}); BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[2][0], args[2][1]});
+#define BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(func, cmp1, cmp2, type1, type2, args) BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[0][0], args[0][1], args[0][2]}); \
+				BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[0][0], args[0][1], args[0][2]}); \
+				BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[1][0], args[1][1], args[1][2]}); BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[1][0], args[1][1], args[1][2]}); \
+				BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[2][0], args[2][1], args[2][2]}); BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[2][0], args[2][1], args[2][2]})
 
-int argsArr[][2] = {{1000,1024},{10000,1024},{100000,1024}};
+int argsArr[][2] = {{1000,1024},{100000,1024},{1000000,1024}};
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_generated, set<string>, set<KeyDometStr64>, argsArr)
+BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_generated, set<string>, set<KeyDometStr64>, argsArr);
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_parsed_data, set<string>, set<KeyDometStr64>, argsArr)
+BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_parsed_data, set<string>, set<KeyDometStr64>, argsArr);
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_10_percent_unparsed_lookups, set<string>, set<KeyDometStr64>, argsArr)
+BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_10_percent_unparsed_lookups, set<string>, set<KeyDometStr64>, argsArr);
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups, set<string>, set<KeyDometStr64>, argsArr)
+BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups, set<string>, set<KeyDometStr64>, argsArr);
 
+// can't assign in non exceutable code so must declare a new array
+int argsArr2[][3] = {{1000,100,1024},{1000,10,1024},{1000,1,1024}};
+BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
+	set<KeyDometStr64>, string, KeyDometStr64, argsArr2);
 
-BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>, 
-	set<KeyDometStr64>, string, KeyDometStr64, argsArr)
+int argsArr3[][3] = {{100000,100,1024},{100000,10,1024},{100000,1,1024}};
+BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
+	set<KeyDometStr64>, string, KeyDometStr64, argsArr2);
+
+int argsArr4[][3] = {{1000000,100,1024},{1000000,10,1024},{1000000,1,1024}};
+BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
+	set<KeyDometStr64>, string, KeyDometStr64, argsArr2);
 
 BENCHMARK_MAIN();
