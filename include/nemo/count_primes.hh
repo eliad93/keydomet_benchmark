@@ -399,6 +399,8 @@ void buildContainer(Container<folly::fbstring>& container, const vector<string>&
 }
 #endif
 
+// TODO: fix code duplication for lookup
+
 template<template<class, class...> class Container, class StrType, class... Args>
 bool lookup(Container<StrType, Args...>& s, const string& key)
 {
@@ -408,7 +410,31 @@ bool lookup(Container<StrType, Args...>& s, const string& key)
 
 // specialized for keydomet-ed containers, which take a keydomet for lookups
 template<template<class, class...> class Container, class... Args>
+bool lookup(Container<KeyDometStr16, Args...>& s, const string& key)
+{
+    auto hkey = makeFindKey(s, key);
+    auto iter = s.find(hkey);
+    return iter != s.end();
+}
+
+template<template<class, class...> class Container, class... Args>
+bool lookup(Container<KeyDometStr32, Args...>& s, const string& key)
+{
+    auto hkey = makeFindKey(s, key);
+    auto iter = s.find(hkey);
+    return iter != s.end();
+}
+
+template<template<class, class...> class Container, class... Args>
 bool lookup(Container<KeyDometStr64, Args...>& s, const string& key)
+{
+    auto hkey = makeFindKey(s, key);
+    auto iter = s.find(hkey);
+    return iter != s.end();
+}
+
+template<template<class, class...> class Container, class... Args>
+bool lookup(Container<KeyDometStr128, Args...>& s, const string& key)
 {
     auto hkey = makeFindKey(s, key);
     auto iter = s.find(hkey);
@@ -430,10 +456,10 @@ void stringCompareAndInsert(vector<string>& input, const vector<string>& lookups
     int counter = 0; 
     buildContainer(container, input);
     for (const string& s : lookups){
-        // if(counter == readToWriteRatio){
-        //     container.insert(T(getRandStr(strLen)));
-        //     counter = 0;
-        // }
+        if(counter == readToWriteRatio){
+            container.insert(T(getRandStr(strLen)));
+            counter = 0;
+        }
         lookup(container, s);
         counter++;
     }
