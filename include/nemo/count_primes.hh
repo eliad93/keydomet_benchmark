@@ -441,28 +441,42 @@ bool lookup(Container<KeyDometStr128, Args...>& s, const string& key)
     return iter != s.end();
 }
 
+// template <class Container>
+// void stringCompare(const vector<string>& input, const vector<string>& lookups){
+//     Container container;
+//     buildContainer(container, input);
+//     for (const string& s : lookups){
+//         lookup(container, s);
+//     }
+// }
+
 template <class Container>
-void stringCompare(const vector<string>& input, const vector<string>& lookups){
-    Container container;
-    buildContainer(container, input);
+void stringCompare(Container& c, const vector<string>& lookups){
+	Container* c2 = &c;  // just a workaround template arguments deduction fail.
     for (const string& s : lookups){
-        lookup(container, s);
+        lookup(*c2, s);
     }
 }
 
-template <class C, class T>
-void stringCompareAndInsert(vector<string>& input, const vector<string>& lookups, const int readToWriteRatio, const size_t strLen){
-    C container;
+template <class Container, class T>
+void stringCompareAndInsert(Container& c, const vector<string>& lookups, const int readToWriteRatio, const size_t strLen){
+    Container* c2 = &c;  // just a workaround template arguments deduction fail.
     int counter = 0; 
-    buildContainer(container, input);
     for (const string& s : lookups){
         if(counter == readToWriteRatio){
-            container.insert(T(getRandStr(strLen)));
+            (*c2).insert(T(getRandStr(strLen)));
             counter = 0;
         }
-        lookup(container, s);
+        lookup(*c2, s);
         counter++;
     }
+}
+
+template <class C>
+C buildContainerWrapper(const vector<string>& input){
+	C c;
+	buildContainer(c, input);
+	return c;
 }
 
 } /* end namespace nemo */

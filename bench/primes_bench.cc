@@ -14,10 +14,9 @@ template <class C> static void BM_generated(benchmark::State& state) {
 	const vector<string>& input = getInput(state.range(0), state.range(1));
 	const vector<string>& lookups = getInput(state.range(0), state.range(1));
 	// TODO: make these lines work
-	// C c;
-	// buildContainer(c, input);
+	C c = buildContainerWrapper<C>(input);
 	while(state.KeepRunning()){
-		stringCompare<C>(input, lookups);
+		stringCompare<C>(c, lookups);
 	}
 }
 
@@ -26,8 +25,9 @@ template <class C> static void BM_generated(benchmark::State& state) {
 template <class C> static void BM_parsed_data(benchmark::State& state) {
 	const vector<string>& input = parseCSV<vector<string>>(Csv6MStringsPath, 0.9);
 	const vector<string>& lookups = getInputFromData(state.range(0),input);
+	C c = buildContainerWrapper<C>(input);
 	while(state.KeepRunning()){
-		stringCompare<C>(input, lookups);
+		stringCompare<C>(c, lookups);
 	}
 }
 
@@ -40,8 +40,9 @@ template <class C> static void BM_parsed_data(benchmark::State& state) {
 template <class C> static void BM_90_percent_parsed_data_10_percent_unparsed_lookups(benchmark::State& state) {
 	const vector<string>& input = parseCSV<vector<string>>(Csv6MStringsPath, 0.9);
 	const vector<string>& lookups = getInputFromData(state.range(0),parseCSV<vector<string>>(Csv6MStringsPath, 0.1));
+	C c = buildContainerWrapper<C>(input);
 	while(state.KeepRunning()){
-		stringCompare<C>(input, lookups);
+		stringCompare<C>(c, lookups);
 	}
 }
 
@@ -54,8 +55,9 @@ template <class C> static void BM_90_percent_parsed_data_10_percent_unparsed_loo
 template <class C> static void BM_90_percent_parsed_data_5050_parsed_unparsed_lookups(benchmark::State& state) {
 	const vector<string>& input = parseCSV<vector<string>>(Csv6MStringsPath, 0.9);
 	const vector<string>& lookups = getInputFromParsedAndUnparsed(state.range(0), Csv6MStringsPath);
+	C c = buildContainerWrapper<C>(input);
 	while(state.KeepRunning()){
-		stringCompare<C>(input, lookups);
+		stringCompare<C>(c, lookups);
 	}
 }
 
@@ -72,8 +74,9 @@ template <class C, class T> static void BM_90_percent_parsed_data_5050_parsed_un
 	auto writes = input;
 	int readToWriteRatio = state.range(1);
 	int strLen = state.range(2);
+	C c = buildContainerWrapper<C>(writes);
 	while(state.KeepRunning()){
-		stringCompareAndInsert<C,T>(writes, lookups, readToWriteRatio, strLen);
+		stringCompareAndInsert<C,T>(c, lookups, readToWriteRatio, strLen);
 	}
 }
 
