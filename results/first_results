@@ -1,54 +1,54 @@
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 Benchmark                                                                                                                                 Time           CPU Iterations
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BM_generated<set<string>>/1000/1024                                                                                                  483358 ns     483226 ns       1414
-BM_generated<set<KeyDometStr64>>/1000/1024                                                                                           440166 ns     440118 ns       1595
-BM_generated<set<string>>/100000/1024                                                                                             202713635 ns  202641285 ns          3
-BM_generated<set<KeyDometStr64>>/100000/1024                                                                                      170774467 ns  170719880 ns          4
-BM_generated<set<string>>/1000000/1024                                                                                           4486576163 ns 4477141246 ns          1
-BM_generated<set<KeyDometStr64>>/1000000/1024                                                                                    3510509072 ns 3501468834 ns          1
-BM_parsed_data<set<string>>/1000/1024                                                                                             667272492 ns  667037876 ns          1
-BM_parsed_data<set<KeyDometStr64>>/1000/1024                                                                                      503852246 ns  503723755 ns          2
-BM_parsed_data<set<string>>/100000/1024                                                                                           796102943 ns  796006077 ns          1
-BM_parsed_data<set<KeyDometStr64>>/100000/1024                                                                                    544193564 ns  543985000 ns          1
-BM_parsed_data<set<string>>/1000000/1024                                                                                         1266507515 ns 1266219935 ns          1
-BM_parsed_data<set<KeyDometStr64>>/1000000/1024                                                                                   909627452 ns  909376794 ns          1
-BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000/1024                                                      674384882 ns  674141790 ns          1
-BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000/1024                                               501398102 ns  501267300 ns          2
-BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/100000/1024                                                    730058554 ns  729814768 ns          1
-BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/100000/1024                                             667333182 ns  667270427 ns          1
-BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000000/1024                                                   729387261 ns  729307771 ns          1
-BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000000/1024                                            545148113 ns  545091505 ns          2
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr16>>/1000/1024                                              567468830 ns  567415587 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr16>>/100000/1024                                            689103510 ns  689039369 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr16>>/1000000/1024                                           886170220 ns  886081464 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr32>>/1000/1024                                              520938246 ns  520889537 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr32>>/100000/1024                                            623587353 ns  623529269 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr32>>/1000000/1024                                           625501520 ns  625437051 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000/1024                                              617509861 ns  615136484 ns          2
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/100000/1024                                            538374417 ns  538319104 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000000/1024                                           532305224 ns  532249979 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000/1024                                                     675071648 ns  675008128 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr128>>/1000/1024                                             498361750 ns  498152615 ns          2
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/100000/1024                                                   786415135 ns  786326239 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr128>>/100000/1024                                           535601968 ns  535540780 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000000/1024                                                  791749079 ns  791666398 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr128>>/1000000/1024                                          536486016 ns  536424722 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000/100/1024                   670715028 ns  670497784 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000/100/1024     502318639 ns  502265439 ns          2
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000/10/1024                    673112622 ns  673042445 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000/10/1024      506975729 ns  506920372 ns          2
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000/1/1024                     718244261 ns  718169761 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000/1/1024       551024894 ns  550965099 ns          2
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/100000/100/1024                 849506802 ns  849422431 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/100000/100/1024   599324793 ns  599261433 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/100000/10/1024                 1265210236 ns 1264762626 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/100000/10/1024   1012344132 ns 1012084305 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/100000/1/1024                  5608344613 ns 5605050987 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/100000/1/1024    5119193131 ns 5117915610 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000000/100/1024               1028874755 ns 1019998591 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000000/100/1024  600580462 ns  600516583 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000000/10/1024                1280121799 ns 1279825783 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000000/10/1024  1026461615 ns 1026205384 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000000/1/1024                 5766022469 ns 5757573263 ns          1
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000000/1/1024   5444855326 ns 5436230789 ns          1
+BM_generated<set<string>>/1000/1024                                                                                                  132766 ns     132753 ns       5071
+BM_generated<set<KeyDometStr64>>/1000/1024                                                                                           154020 ns     154004 ns       4591
+BM_generated<set<string>>/100000/1024                                                                                              54355950 ns   54349699 ns         10
+BM_generated<set<KeyDometStr64>>/100000/1024                                                                                       57161543 ns   57140679 ns         10
+BM_generated<set<string>>/1000000/1024                                                                                           1355423585 ns 1355116587 ns          1
+BM_generated<set<KeyDometStr64>>/1000000/1024                                                                                    1401504131 ns 1401044236 ns          1
+BM_parsed_data<set<string>>/1000/1024                                                                                                695690 ns     695606 ns       1006
+BM_parsed_data<set<KeyDometStr64>>/1000/1024                                                                                         538220 ns     538164 ns       1270
+BM_parsed_data<set<string>>/100000/1024                                                                                           121443926 ns  121430602 ns          6
+BM_parsed_data<set<KeyDometStr64>>/100000/1024                                                                                     97044449 ns   97033792 ns          7
+BM_parsed_data<set<string>>/1000000/1024                                                                                          590017882 ns  589956666 ns          1
+BM_parsed_data<set<KeyDometStr64>>/1000000/1024                                                                                   501666674 ns  501619463 ns          1
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000/1024                                                         760675 ns     760603 ns        902
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000/1024                                                  588379 ns     588312 ns       1213
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/100000/1024                                                     63655109 ns   63629676 ns          9
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/100000/1024                                              47918891 ns   47913915 ns         14
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000000/1024                                                    63546029 ns   63540038 ns         11
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000000/1024                                             48913890 ns   48898244 ns         14
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr16>>/1000/1024                                                 683827 ns     683762 ns        784
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr16>>/100000/1024                                            120387987 ns  120376643 ns          5
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr16>>/1000000/1024                                           118844069 ns  118830757 ns          5
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr32>>/1000/1024                                                 586901 ns     586835 ns       1126
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr32>>/100000/1024                                            110406033 ns  110395592 ns          5
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr32>>/1000000/1024                                           109947550 ns  109935529 ns          6
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000/1024                                                 577617 ns     577556 ns       1257
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/100000/1024                                            100126894 ns  100116351 ns          7
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000000/1024                                           107371725 ns  107361622 ns          7
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000/1024                                                        767210 ns     767130 ns        908
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr128>>/1000/1024                                                535110 ns     535054 ns       1310
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/100000/1024                                                   123640316 ns  123627272 ns          6
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr128>>/100000/1024                                            94280086 ns   94269789 ns          8
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000000/1024                                                  127336330 ns  127324340 ns          5
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr128>>/1000000/1024                                           93443137 ns   93433025 ns          7
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000/100/1024                     1231015 ns    1230878 ns        562
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000/100/1024       1028196 ns    1028089 ns        671
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000/10/1024                      5900323 ns    5849533 ns        130
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000/10/1024        5100345 ns    5099868 ns        136
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000/1/1024                      45810452 ns   45805795 ns         15
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000/1/1024        50315435 ns   49857553 ns         15
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/100000/100/1024                 174177907 ns  174158960 ns          4
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/100000/100/1024   161882081 ns  161635575 ns          5
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/100000/10/1024                  589757409 ns  589697758 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/100000/10/1024    558831232 ns  558773014 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/100000/1/1024                  4823586579 ns 4816122551 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/100000/1/1024    4619585663 ns 4619123733 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000000/100/1024                180411650 ns  180392684 ns          4
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000000/100/1024  153383851 ns  153368218 ns          5
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000000/10/1024                 611773712 ns  611691628 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000000/10/1024   576345946 ns  576288460 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<string>, string>/1000000/1/1024                 4945737414 ns 4938372395 ns          1
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes<set<KeyDometStr64>, KeyDometStr64>/1000000/1/1024   4755755373 ns 4755284854 ns          1
