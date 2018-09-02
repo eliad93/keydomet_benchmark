@@ -8,27 +8,8 @@ using std::endl;
 
 using namespace nemo;
 
-const string Csv6MStringsPath = string("/home/eliad93/keydomet_benchmark/6M_keys_+_vals.csv");
-const string sizeMeasurmentsPath = string("/home/eliad93/keydomet_benchmark/results/size_overhead");
-
-// template <class C>
-// class ContainerName {
-// 	C c;
-// public:
-// 	string name(){
-// 		if(std::is_same<C, set<string>>::value){
-// 			return string("set<string>");
-// 		} else if(std::is_same<C, set<KeyDometStr16>>::value){
-// 			return string("set<KeyDometStr16>");
-// 		} else if(std::is_same<C, set<KeyDometStr32>>::value){
-// 			return string("set<KeyDometStr32>");
-// 		} else if(std::is_same<C, set<KeyDometStr64>>::value){
-// 			return string("set<KeyDometStr64>");
-// 		} else {
-// 			return string("set<KeyDometStr128>");
-// 		}
-// 	}
-// };
+const string Csv6MStringsPath = string("/home/eliad93/k1/keydomet_benchmark/6M_keys_+_vals.csv");
+const string sizeMeasurmentsPath = string("/home/eliad93/k1/keydomet_benchmark/results/size_overhead");
 
 template <class C> static void BM_generated(benchmark::State& state) {
 	const vector<string>& input = getInput(state.range(0), state.range(1));
@@ -83,7 +64,7 @@ template <class C> static void BM_90_percent_parsed_data_5050_parsed_unparsed_lo
     }
 
 	std::ofstream outFile;
-	outFile.open(sizeMeasurmentsPath.c_str(), std::ios_base::trunc);
+	outFile.open(sizeMeasurmentsPath.c_str(), std::ios_base::app);
 
 	outFile << "memory consumption (using size) of " << containerName<C>() << " with " << c.size()
 	<< " strings is: " << memorySize << " bytes." << std::endl;
@@ -156,11 +137,11 @@ BM_generated_string_compare<set<KeyDometStr64>>/1000000/1024 2869301162 ns 28689
 
 int argsArr[][2] = {{1000,1024},{100000,1024},{1000000,1024}};
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_generated, set<string>, set<KeyDometStr64>, argsArr);
+// BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_generated, set<string>, set<KeyDometStr64>, argsArr);
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_parsed_data, set<string>, set<KeyDometStr64>, argsArr);
+// BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_parsed_data, set<string>, set<KeyDometStr64>, argsArr);
 
-BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_10_percent_unparsed_lookups, set<string>, set<KeyDometStr64>, argsArr);
+// BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_10_percent_unparsed_lookups, set<string>, set<KeyDometStr64>, argsArr);
 
 BENCHMARK_TEMPLATE(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups, 
 	set<KeyDometStr16>)->Args({1000,1024})->Args({100000,1024})->Args({1000000,1024});
@@ -173,17 +154,17 @@ BENCHMARK_TEMPLATE(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups,
 
 BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups, set<string>, set<KeyDometStr128>, argsArr);
 
-// can't assign in non exceutable code so must declare a new array
-int argsArr2[][3] = {{1000,100,1024},{1000,10,1024},{1000,1,1024}};
-BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
-	set<KeyDometStr64>, string, KeyDometStr64, argsArr2);
+// // can't assign in non exceutable code so must declare a new array
+// int argsArr2[][3] = {{1000,100,1024},{1000,10,1024},{1000,1,1024}};
+// BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
+// 	set<KeyDometStr64>, string, KeyDometStr64, argsArr2);
 
-int argsArr3[][3] = {{100000,100,1024},{100000,10,1024},{100000,1,1024}};
-BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
-	set<KeyDometStr64>, string, KeyDometStr64, argsArr3);
+// int argsArr3[][3] = {{100000,100,1024},{100000,10,1024},{100000,1,1024}};
+// BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
+// 	set<KeyDometStr64>, string, KeyDometStr64, argsArr3);
 
-int argsArr4[][3] = {{1000000,100,1024},{1000000,10,1024},{1000000,1,1024}};
-BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
-	set<KeyDometStr64>, string, KeyDometStr64, argsArr4);
+// int argsArr4[][3] = {{1000000,100,1024},{1000000,10,1024},{1000000,1,1024}};
+// BENCH_2_TYPES_COMPARE_2_TYPES_3_SETS_OF_3_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_with_generated_writes, set<string>,
+// 	set<KeyDometStr64>, string, KeyDometStr64, argsArr4);
 
 BENCHMARK_MAIN();
