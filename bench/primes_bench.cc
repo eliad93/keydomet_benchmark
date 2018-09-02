@@ -11,24 +11,24 @@ using namespace nemo;
 const string Csv6MStringsPath = string("/home/eliad93/keydomet_benchmark/6M_keys_+_vals.csv");
 const string sizeMeasurmentsPath = string("/home/eliad93/keydomet_benchmark/results/size_overhead");
 
-template <class C>
-class ContainerName {
-	C c;
-public:
-	string name(){
-		if(std::is_same<C, set<string>>::value){
-			return string("set<string>");
-		} else if(std::is_same<C, set<KeyDometStr16>>::value){
-			return string("set<KeyDometStr16>");
-		} else if(std::is_same<C, set<KeyDometStr32>>::value){
-			return string("set<KeyDometStr32>");
-		} else if(std::is_same<C, set<KeyDometStr64>>::value){
-			return string("set<KeyDometStr64>");
-		} else {
-			return string("set<KeyDometStr128>");
-		}
-	}
-};
+// template <class C>
+// class ContainerName {
+// 	C c;
+// public:
+// 	string name(){
+// 		if(std::is_same<C, set<string>>::value){
+// 			return string("set<string>");
+// 		} else if(std::is_same<C, set<KeyDometStr16>>::value){
+// 			return string("set<KeyDometStr16>");
+// 		} else if(std::is_same<C, set<KeyDometStr32>>::value){
+// 			return string("set<KeyDometStr32>");
+// 		} else if(std::is_same<C, set<KeyDometStr64>>::value){
+// 			return string("set<KeyDometStr64>");
+// 		} else {
+// 			return string("set<KeyDometStr128>");
+// 		}
+// 	}
+// };
 
 template <class C> static void BM_generated(benchmark::State& state) {
 	const vector<string>& input = getInput(state.range(0), state.range(1));
@@ -73,10 +73,24 @@ template <class C> static void BM_90_percent_parsed_data_5050_parsed_unparsed_lo
 	const vector<string>& input = parseCSV<vector<string>>(Csv6MStringsPath, 0.9);
 	const vector<string>& lookups = getInputFromParsedAndUnparsed(state.range(0), Csv6MStringsPath);
 	C c = buildContainerWrapper<C>(input);
+	size_t memorySize = 0;
+	for(auto s : c){
+        memorySize += s.size() * sizeof(std::string::value_type) + sizeof(s);
+    }
+	size_t memoryCapacity = 0;
+		for(auto s : c){
+        memoryCapacity += s.capacity() * sizeof(std::string::value_type) + sizeof(s);
+    }
+
 	std::ofstream outFile;
-	outFile.open(sizeMeasurmentsPath.c_str(), std::ios_base::app);
-	outFile << "memory consumption of " << ContainerName<C>().name() << " with " << c.size() 
-										<< " strings is: " << sizeof(c) << std::endl;
+	outFile.open(sizeMeasurmentsPath.c_str(), std::ios_base::trunc);
+
+	outFile << "memory consumption (using size) of " << containerName<C>() << " with " << c.size()
+	<< " strings is: " << memorySize << " bytes." << std::endl;
+
+	outFile << "memory consumption (using capacity) of " << containerName<C>() << " with " << c.size()
+	<< " strings is: " << memoryCapacity << " bytes." << std::endl;
+
 	outFile.close();
 	while(state.KeepRunning()){
 		stringCompare<C>(c, lookups);

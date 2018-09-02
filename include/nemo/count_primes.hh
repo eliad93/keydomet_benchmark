@@ -219,6 +219,14 @@ static void flipBytes(kdmt128_t& val) {
             return str;
         }
 
+        size_t size() const noexcept {
+            return str.size() + sizeof(prefix);
+        }
+
+        size_t capacity() const noexcept{
+            return str.capacity() + sizeof(prefix);
+        }
+
     private:
 
         // using composition instead of inheritance (from StrImp) to make sure
@@ -441,18 +449,9 @@ bool lookup(Container<KeyDometStr128, Args...>& s, const string& key)
     return iter != s.end();
 }
 
-// template <class Container>
-// void stringCompare(const vector<string>& input, const vector<string>& lookups){
-//     Container container;
-//     buildContainer(container, input);
-//     for (const string& s : lookups){
-//         lookup(container, s);
-//     }
-// }
-
 template <class Container>
 void stringCompare(Container& c, const vector<string>& lookups){
-	Container* c2 = &c;  // just a workaround template arguments deduction fail.
+    Container* c2 = &c;  // just a workaround template arguments deduction fail.
     for (const string& s : lookups){
         lookup(*c2, s);
     }
@@ -474,10 +473,34 @@ void stringCompareAndInsert(Container& c, const vector<string>& lookups, const i
 
 template <class C>
 C buildContainerWrapper(const vector<string>& input){
-	C c;
-	buildContainer(c, input);
-	return c;
+    C c;
+    buildContainer(c, input);
+    return c;
 }
+
+// template <typename C>
+// size_t containerMemoryUsage(const C& c);
+
+// template <>
+// size_t containerMemoryUsage<typename C, int>(const C& c);
+
+template <typename C>
+string containerName();
+
+template <>
+string containerName<set<string>>();
+
+template <>
+string containerName<set<KeyDometStr16>>();
+
+template <>
+string containerName<set<KeyDometStr32>>();
+
+template <>
+string containerName<set<KeyDometStr64>>();
+
+template <>
+string containerName<set<KeyDometStr128>>();
 
 } /* end namespace nemo */
 

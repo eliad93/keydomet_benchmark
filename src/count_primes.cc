@@ -23,18 +23,35 @@ std::ostream& operator<<(std::ostream& os, const kdmt128_t& val){
     return os;
 }
 
-string nemo::getRandStr(size_t len)
+template<template<class, class...> class Container, class StrType, class... Args>
+bool lookup(Container<StrType, Args...>& s, const string& key)
 {
-    static mt19937 gen{random_device{}()};
-    uniform_int_distribution<short> dis('A', 'z');
-    string s;
-    s.reserve(len);
-    for (size_t i = 0; i < len; ++i)
-        s += (char)dis(gen);
-    return s;
+    auto iter = s.find(key);
+    return iter != s.end();
 }
 
-vector<string> nemo::getInput(size_t keysNum, size_t keyLen)
+// specialized for keydomet-ed containers, which take a keydomet for lookups
+template<template<class, class...> class Container, class... Args>
+bool lookup(Container<KeyDometStr64, Args...>& s, const string& key)
+{
+    auto hkey = makeFindKey(s, key);
+    auto iter = s.find(hkey);
+    return iter != s.end();
+}
+
+namespace nemo {
+    string getRandStr(size_t len){
+        static mt19937 gen{random_device{}()};
+        uniform_int_distribution<short> dis('A', 'z');
+        string s;
+        s.reserve(len);
+        for (size_t i = 0; i < len; ++i){
+            s += (char)dis(gen);
+        }
+        return s;
+    }
+
+vector<string> getInput(size_t keysNum, size_t keyLen)
 {
     vector<string> input{keysNum};
     generate(input.begin(), input.end(), [keyLen] {
@@ -43,7 +60,7 @@ vector<string> nemo::getInput(size_t keysNum, size_t keyLen)
     return input;
 }
 
-vector<string> nemo::vectorCopy(vector<string> data){
+vector<string> vectorCopy(vector<string> data){
     unsigned long size = (unsigned long)data.size();
     vector<string> input{size};
     for(unsigned long i=0; i<size; i++){
@@ -52,11 +69,7 @@ vector<string> nemo::vectorCopy(vector<string> data){
     }
 }
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-vector<string> nemo::getInputFromData(size_t keysNum, vector<string> data)
+vector<string> getInputFromData(size_t keysNum, vector<string> data)
 {
     if(keysNum > data.size()){
         keysNum = data.size(); 
@@ -69,11 +82,8 @@ vector<string> nemo::getInputFromData(size_t keysNum, vector<string> data)
     return input;
 }
 
-
-
-vector<string> nemo::getInputFromParsedAndUnparsed(size_t keysNum, const string& path)
+vector<string> getInputFromParsedAndUnparsed(size_t keysNum, const string& path)
 {
-    
     vector<string> input90 = nemo::parseCSV<vector<string>>(path, 0.9);
     vector<string> input10 = nemo::parseCSV<vector<string>>(path, 0.1);
 
@@ -94,26 +104,34 @@ vector<string> nemo::getInputFromParsedAndUnparsed(size_t keysNum, const string&
     return input;
 }
 
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-template<template<class, class...> class Container, class StrType, class... Args>
-bool lookup(Container<StrType, Args...>& s, const string& key)
-{
-    auto iter = s.find(key);
-    return iter != s.end();
+template <typename C>
+string containerName(){
+    throw std::invalid_argument("bad container type");
 }
 
-// specialized for keydomet-ed containers, which take a keydomet for lookups
-template<template<class, class...> class Container, class... Args>
-bool lookup(Container<KeyDometStr64, Args...>& s, const string& key)
-{
-    auto hkey = makeFindKey(s, key);
-    auto iter = s.find(hkey);
-    return iter != s.end();
+template <>
+string containerName<set<string>>(){
+    return string("set<string>");
+}
+
+template <>
+string containerName<set<KeyDometStr16>>(){
+    return string("set<KeyDometStr16>");
+}
+
+template <>
+string containerName<set<KeyDometStr32>>(){
+    return string("set<KeyDometStr32>");
+}
+
+template <>
+string containerName<set<KeyDometStr64>>(){
+    return string("set<KeyDometStr64>");
+}
+
+template <>
+string containerName<set<KeyDometStr128>>(){
+    return string("set<KeyDometStr128>");
+}
+
 }
