@@ -35,7 +35,9 @@ public:
 			return;
 		}
 		_str = new char[s.length()+1];
-		_size = sprintf(_str, s.c_str());
+		strcpy(_str, s.c_str());
+		_size = s.length(); 
+		//_size = sprintf(_str, s.c_str());
 	}
 
 	MyString(const char* s) :
@@ -45,8 +47,36 @@ public:
 			return;
 		}
 		_str = new char[strlen(s)+1];
-		_size = sprintf(_str, s);
+		strcpy(_str, s);
+		_size = strlen(s); 
+		//_size = sprintf(_str, s);
 	}
+
+	MyString(const MyString& s) :
+		_str(NULL),
+		_size(0){
+		if(s.empty()){
+			return;
+		}
+		_str = new char[s.size()+1];
+		strcpy(_str, s.c_str());
+		_size = s.length(); 
+		//_size = sprintf(_str, s.c_str());
+	}
+
+	MyString& operator= (const MyString& str){
+	if(this == &str){
+		return *this; 
+	}
+	if(_str != NULL){
+		delete[] _str; 
+	}
+	_str = new char[str.size()+1];
+	strcpy(_str, str.c_str());
+	_size = str.length(); 
+	//_size = sprintf(_str, str.c_str());
+	return *this; 
+}
 
 	size_t size() const noexcept {
 		assert((_size==0 && _str==NULL) || (_size>0 && _str != NULL));
@@ -91,10 +121,28 @@ public:
 	}
 
 	friend ostream& operator<< (ostream& os, const MyString& str);
+	
+
 };
 
-ostream& operator<< (ostream& os, const MyString& str){
+inline ostream& operator<< (ostream& os, const MyString& str){
 	return os << str.c_str();
+}
+
+inline bool operator< (const MyString str1, const MyString str2){
+	if(!str1.empty() && !str2.empty()){
+		return strcmp(str1.c_str(), str2.c_str()) < 0;
+	}
+	return false; 
+}
+
+
+
+inline const bool operator== (const MyString s1,const MyString s2){
+	if(s1.size() == s2.size() && s1.c_str() == s2.c_str()){
+		return true;
+	} 
+	return false;
 }
 
 #endif /* MYSTRING_H_ */
