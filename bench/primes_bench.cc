@@ -8,8 +8,8 @@ using std::endl;
 
 using namespace nemo;
 
-const string Csv6MStringsPath = string("/home/eliad93/k1/keydomet_benchmark/6M_keys_+_vals.csv");
-const string sizeMeasurmentsPath = string("/home/eliad93/k1/keydomet_benchmark/results/size_overhead");
+const string Csv6MStringsPath = string("/home/yanivbaldi/keydomet_benchmark/6M keys + vals.csv");
+const string sizeMeasurmentsPath = string("/home/yanivbaldi/keydomet_benchmark/results/size_overhead");
 
 template <class C> static void BM_generated(benchmark::State& state) {
 	const vector<string>& input = getInput(state.range(0), state.range(1));
@@ -99,6 +99,31 @@ template <class C, class T> static void BM_90_percent_parsed_data_5050_parsed_un
 
 ////////////////////////////BENCH 4 - 2 END////////////////////////////////////
 
+////////////////////////////BENCH 5 ///////////////////////////////////////////
+
+
+template <class C> static void BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_wstring(benchmark::State& state) {
+	const vector<wstring>& input = parseCSV_wstring<vector<wstring>>(Csv6MStringsPath, 0.9);
+	const vector<wstring>& lookups = getInputFromParsedAndUnparsed_wstring(state.range(0), Csv6MStringsPath);
+	C c = buildContainerWrapper<C>(input);
+	while(state.KeepRunning()){
+		wstringCompare<C>(c, lookups);
+	}
+}
+
+
+template <class C> static void BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_mystring(benchmark::State& state) {
+	const vector<MyString>& input = parseCSV_MyString<vector<MyString>>(Csv6MStringsPath, 0.9);
+	const vector<MyString>& lookups = getInputFromParsedAndUnparsed_MyString(state.range(0), Csv6MStringsPath);
+	C c = buildContainerWrapper<C>(input);
+	while(state.KeepRunning()){
+		MyStringCompare<C>(c, lookups);
+	} 
+}
+
+
+////////////////////////////BENCH 5 END ////////////////////////////////////////
+
 /*
 	MACRO to workaround the fact that defining the template benchmark with multiple Args will result
 	in unfriendly output where the two containers results are far each other - example:
@@ -135,6 +160,10 @@ BM_generated_string_compare<set<KeyDometStr64>>/1000000/1024 2869301162 ns 28689
 				BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[1][0], args[1][1], args[1][2]}); BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[1][0], args[1][1], args[1][2]}); \
 				BENCHMARK_TEMPLATE(func, cmp1, type1)->Args({args[2][0], args[2][1], args[2][2]}); BENCHMARK_TEMPLATE(func, cmp2, type2)->Args({args[2][0], args[2][1], args[2][2]})
 
+#define BENCH_COMPARE_1_TYPES_3_SETS_OF_2_ARGS(func, type, args) BENCHMARK_TEMPLATE(func, type)->Args({args[0][0], args[0][1]});  \
+				BENCHMARK_TEMPLATE(func, type)->Args({args[1][0], args[1][1]}); \
+				BENCHMARK_TEMPLATE(func, type)->Args({args[2][0], args[2][1]})
+
 int argsArr[][2] = {{1000,1024},{100000,1024},{1000000,1024}};
 
 BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_generated, set<string>, set<KeyDometStr64>, argsArr);
@@ -153,6 +182,9 @@ BENCHMARK_TEMPLATE(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups,
 	set<KeyDometStr64>)->Args({1000,1024})->Args({100000,1024})->Args({1000000,1024});
 
 BENCH_COMPARE_2_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups, set<string>, set<KeyDometStr128>, argsArr);
+
+BENCH_COMPARE_1_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_wstring, set<wstring>, argsArr);
+BENCH_COMPARE_1_TYPES_3_SETS_OF_2_ARGS(BM_90_percent_parsed_data_5050_parsed_unparsed_lookups_mystring, set<MyString>, argsArr);
 
 // can't assign in non exceutable code so must declare a new array
 int argsArr2[][3] = {{1000,100,1024},{1000,10,1024},{1000,1,1024}};

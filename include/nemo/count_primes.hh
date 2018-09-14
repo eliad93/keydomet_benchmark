@@ -10,6 +10,7 @@
 #include <set>
 #include <algorithm>
 #include <fstream>
+#include "MyString.hh"
 
 using namespace std;
 
@@ -397,16 +398,6 @@ void buildContainer(Container<string, ContainerArgs...>& container, const vector
     });
 }
 
-#if BENCH_FOLLY
-template<template<typename> class Container>
-void buildContainer(Container<folly::fbstring>& container, const vector<string>& input)
-{
-    transform(input.begin(), input.end(), container.begin(), [] (const string& str) {
-        return folly::fbstring{str};
-    });
-}
-#endif
-
 // TODO: fix code duplication for lookup
 
 template<template<class, class...> class Container, class StrType, class... Args>
@@ -477,6 +468,128 @@ C buildContainerWrapper(const vector<string>& input){
     buildContainer(c, input);
     return c;
 }
+
+
+
+/////////////////////////////////////////////////////// FUNCTIONS FOR WSTRING COMPARE /////////////////////////////////////////////////
+vector<wstring> getInputFromParsedAndUnparsed_wstring(size_t keysNum, const string& path);
+
+template<template<class, typename...> class Container,
+            typename... Args>
+    bool lookup(Container<wstring, Args...>& s, const wstring& key)
+    {
+        auto iter = s.find(key);
+        return iter != s.end();
+    }
+ 
+template <class Container>
+    void wstringCompare(Container& c, const vector<wstring>& lookups){
+    Container* c2 = &c;  // just a workaround template arguments deduction fail.
+    for (const wstring& s : lookups){
+        lookup(*c2, s);
+    }
+} 
+
+template <class Container>
+    Container parseCSV_wstring(const string& path, double portion){
+        string line; 
+        ifstream infile(path.c_str());
+        if(infile.fail()) {
+            __throw_invalid_argument("can't open file - maybe path is wrong?");
+        }
+        Container c;
+        while(infile.good()){
+            getline(infile,line);
+            wstring lineW (line.begin(), line.end());
+            c.push_back(lineW);
+        }
+        random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
+        typename Container::const_iterator first = c.begin();
+        typename Container::const_iterator last = c.begin() + (c.size()*portion);
+        Container newC(first, last);
+        random_shuffle(newC.begin(), newC.end());
+        return c;
+    }
+
+
+template<template<class, typename...> class Container,
+            typename... ContainerArgs>
+    void buildContainer(Container<wstring, ContainerArgs...>& container, const vector<wstring>& input)
+    {
+        transform(input.begin(), input.end(), std::inserter(container, container.begin()), [](const wstring& str) {
+            return str;
+        });
+    }
+
+
+template <class C>
+    C buildContainerWrapper(const vector<wstring>& input){
+        C c;
+        buildContainer(c, input);
+        return c;
+    }
+
+/////////////////////////////////////////////////////// FUNCTIONS FOR WSTRING COMPARE END/////////////////////////////////////////////////
+ 
+
+/////////////////////////////////////////////////////// FUNCTIONS FOR MyString COMPARE /////////////////////////////////////////////////
+vector<MyString> getInputFromParsedAndUnparsed_MyString(size_t keysNum, const string& path);
+
+template<template<class, typename...> class Container,
+            typename... Args>
+    bool lookup(Container<MyString, Args...>& s, const MyString& key)
+    {
+        auto iter = s.find(key);
+        return iter != s.end();
+    }
+
+template <class Container>
+    void MyStringCompare(Container& c, const vector<MyString>& lookups){
+        Container* c2 = &c;  // just a workaround template arguments deduction fail.
+        for (const MyString& s : lookups){
+            lookup(*c2, s);
+        }
+    } 
+        
+template <class Container>
+    Container parseCSV_MyString(const string& path, double portion){
+        string line; 
+        ifstream infile(path.c_str());
+        if(infile.fail()) {
+            __throw_invalid_argument("can't open file - maybe path is wrong?");
+        }
+        Container c;
+        while(!infile.eof()){
+            getline(infile,line);
+            MyString* lineS = new MyString(line);
+            c.push_back(*lineS);
+            }
+        random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
+        typename Container::const_iterator first = c.begin();
+        typename Container::const_iterator last = c.begin() + (c.size()*portion);
+        Container newC(first, last);
+        random_shuffle(newC.begin(), newC.end());
+        return c;
+    }
+
+template<template<class, typename...> class Container,
+            typename... ContainerArgs>
+    void buildContainer(Container<MyString, ContainerArgs...>& container, const vector<MyString>& input)
+    {
+        transform(input.begin(), input.end(), std::inserter(container, container.begin()), [](const MyString& str) {
+            return str;
+        });
+    }
+
+template <class C>
+    C buildContainerWrapper(const vector<MyString>& input){
+        C c;
+        buildContainer(c, input);
+        return c;
+    }
+
+/////////////////////////////////////////////////////// FUNCTIONS FOR MyString COMPARE END /////////////////////////////////////////////////
+
 
 // template <typename C>
 // size_t containerMemoryUsage(const C& c);

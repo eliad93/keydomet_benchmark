@@ -1,11 +1,3 @@
-
-#if BENCH_FOLLY
-#   include "../folly/folly/FBString.h"
-#   define IF_TEST_FOLLY(s) , s
-#else
-#   define IF_TEST_FOLLY(s)
-#endif
-
 #include <set>
 #include <unordered_set>
 #include <vector>
@@ -103,6 +95,58 @@ vector<string> getInputFromParsedAndUnparsed(size_t keysNum, const string& path)
     random_shuffle(input.begin(), input.end());
     return input;
 }
+
+
+/////////////////////////////////////////////////////// FUNCTIONS FOR WSTRING COMPARE /////////////////////////////////////////////////
+vector<wstring> getInputFromParsedAndUnparsed_wstring(size_t keysNum, const string& path)
+{
+    vector<wstring> input90 = nemo::parseCSV_wstring<vector<wstring>>(path, 0.9);
+    vector<wstring> input10 = nemo::parseCSV_wstring<vector<wstring>>(path, 0.1);
+
+    random_shuffle(input90.begin(), input90.end());
+    random_shuffle(input10.begin(), input10.end());
+
+    if(keysNum/2 > min(input90.size(), input10.size())){
+        keysNum = min(input90.size(), input10.size())*2; 
+    }
+    vector<wstring> input{keysNum};
+
+    for(int i=0; i<keysNum/2; i++){
+        input.push_back(input90[i]);
+        input.push_back(input10[i]);
+    }
+
+    random_shuffle(input.begin(), input.end());
+    return input;
+}
+/////////////////////////////////////////////////////// FUNCTIONS FOR WSTRING COMPARE END/////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////////// FUNCTIONS FOR MyString COMPARE /////////////////////////////////////////////////
+vector<MyString> getInputFromParsedAndUnparsed_MyString(size_t keysNum, const string& path)
+{
+    vector<MyString> input90 = nemo::parseCSV_MyString<vector<MyString>>(path, 0.9);
+    vector<MyString> input10 = nemo::parseCSV_MyString<vector<MyString>>(path, 0.1);
+
+    random_shuffle(input90.begin(), input90.end());
+    random_shuffle(input10.begin(), input10.end());
+
+    if(keysNum/2 > min(input90.size(), input10.size())){
+        keysNum = min(input90.size(), input10.size())*2; 
+    }
+    vector<MyString> input{keysNum};
+
+    for(int i=0; i<keysNum/2 -1; i++){
+        input.push_back(input90[i]);
+        input.push_back(input10[i]);
+    }
+    //random_shuffle(input.begin(), input.end());
+    return input;
+
+}
+/////////////////////////////////////////////////////// FUNCTIONS FOR MyString COMPARE END/////////////////////////////////////////////////
+
 
 template <typename C>
 string containerName(){
