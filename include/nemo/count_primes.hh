@@ -8,8 +8,11 @@
 #include <vector>
 #include <cmath>
 #include <set>
+#include <map>
 #include <algorithm>
 #include <fstream>
+#include <locale>
+#include <codecvt>
 #include "MyString.hh"
 
 using namespace std;
@@ -72,6 +75,7 @@ namespace nemo {
 static const char* getRawStr(const char* str) { return str; }
 static const char* getRawStr(const std::string& str) { return str.data(); }
 static const char* getRawStr(const string_view& str) { return str.data(); }
+static const char* getRawStr(const MyString& str) { return str.c_str(); }
 
     //
     // Helper function for swapping bytes, turning the big endian order in the string into
@@ -249,6 +253,8 @@ static void flipBytes(kdmt128_t& val) {
     using KeyDometStr64 = KeyDometStr<std::string, KeyDometSize::SIZE_64BIT>;
     using KeyDometStr128 = KeyDometStr<std::string, KeyDometSize::SIZE_128BIT>;
 
+    using KeyDometMyString64 = KeyDometStr<MyString, KeyDometSize::SIZE_64BIT>;
+
     std::ostream& operator<<(std::ostream& os, const kdmt128_t& val);
 
     template<typename StrImp, KeyDometSize Size>
@@ -342,14 +348,27 @@ std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk){
 
     vector<string> getInput(size_t keysNum, size_t keyLen);
 
-    vector<string> vectorCopy(vector<string> data);
-
     /////////////////////////////////////////////////////////BENCH 2////////////////////////////////////////////////////////////
-    vector<string> getInputFromData(size_t keysNum, vector<string> data);
-    vector<string> getInputFromParsedAndUnparsed(size_t keysNum, const string& path);
+    vector<string> getInputFromData(size_t keysNum, const vector<string>& data);
+    vector<string> getInputFromParsedAndUnparsed(size_t keysNum, const vector<string>& path);
+
+    template <typename T>
+    vector<T> getPortion(const vector<T>& v, double portion, bool flip=false){
+    assert(portion<=1);
+    int start=0, end=v.size();
+    if(flip){
+        start = v.size()-(v.size()*portion);
+    } else {
+        end = v.size()*portion;
+    }
+    typename vector<T>::const_iterator first = v.begin() + start;
+    typename vector<T>::const_iterator last = v.begin() + end;
+    vector<T> input(first, last);
+    return input;
+}
 
     template <class Container>
-    Container parseCSV(const string& path, double portion){
+    Container parseCSV(const string& path){
         string line;
         ifstream infile(path.c_str());
         if(infile.bad()) {
@@ -360,25 +379,9 @@ std::ostream& operator<<(std::ostream& os, const KeyDometStr<StrImp, Size>& hk){
             getline(infile,line);
             c.push_back(line);
         }
-        random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
-        typename Container::const_iterator first = c.begin();
-        typename Container::const_iterator last = c.begin() + (c.size()*portion);
-        Container newC(first, last);
-        random_shuffle(newC.begin(), newC.end());
-        return newC;
+        return c;
     }
     /////////////////////////////////////////////////////////BENCH 2 END ////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
 
 template<template<class, typename...> class Container,
         typename StrT, KeyDometSize Size, typename... ContainerArgs>
@@ -397,8 +400,6 @@ void buildContainer(Container<string, ContainerArgs...>& container, const vector
         return str;
     });
 }
-
-// TODO: fix code duplication for lookup
 
 template<template<class, class...> class Container, class StrType, class... Args>
 bool lookup(Container<StrType, Args...>& s, const string& key)
@@ -472,7 +473,9 @@ C buildContainerWrapper(const vector<string>& input){
 
 
 /////////////////////////////////////////////////////// FUNCTIONS FOR WSTRING COMPARE /////////////////////////////////////////////////
-vector<wstring> getInputFromParsedAndUnparsed_wstring(size_t keysNum, const string& path);
+vector<wstring> getInputFromParsedAndUnparsed_wstring(size_t keysNum, const vector<string>& parsed);
+void wstringCompare(set<wstring>& c, const vector<wstring>& lookups);
+void buildContainerWstring(set<wstring>& container, const vector<string>& input);
 
 template<template<class, typename...> class Container,
             typename... Args>
@@ -481,56 +484,8 @@ template<template<class, typename...> class Container,
         auto iter = s.find(key);
         return iter != s.end();
     }
- 
-template <class Container>
-    void wstringCompare(Container& c, const vector<wstring>& lookups){
-    Container* c2 = &c;  // just a workaround template arguments deduction fail.
-    for (const wstring& s : lookups){
-        lookup(*c2, s);
-    }
-} 
-
-template <class Container>
-    Container parseCSV_wstring(const string& path, double portion){
-        string line; 
-        ifstream infile(path.c_str());
-        if(infile.fail()) {
-            __throw_invalid_argument("can't open file - maybe path is wrong?");
-        }
-        Container c;
-        while(infile.good()){
-            getline(infile,line);
-            wstring lineW (line.begin(), line.end());
-            c.push_back(lineW);
-        }
-        random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
-        typename Container::const_iterator first = c.begin();
-        typename Container::const_iterator last = c.begin() + (c.size()*portion);
-        Container newC(first, last);
-        random_shuffle(newC.begin(), newC.end());
-        return c;
-    }
-
-
-template<template<class, typename...> class Container,
-            typename... ContainerArgs>
-    void buildContainer(Container<wstring, ContainerArgs...>& container, const vector<wstring>& input)
-    {
-        transform(input.begin(), input.end(), std::inserter(container, container.begin()), [](const wstring& str) {
-            return str;
-        });
-    }
-
-
-template <class C>
-    C buildContainerWrapper(const vector<wstring>& input){
-        C c;
-        buildContainer(c, input);
-        return c;
-    }
 
 /////////////////////////////////////////////////////// FUNCTIONS FOR WSTRING COMPARE END/////////////////////////////////////////////////
- 
 
 /////////////////////////////////////////////////////// FUNCTIONS FOR MyString COMPARE /////////////////////////////////////////////////
 vector<MyString> getInputFromParsedAndUnparsed_MyString(size_t keysNum, const string& path);
@@ -542,14 +497,6 @@ template<template<class, typename...> class Container,
         auto iter = s.find(key);
         return iter != s.end();
     }
-
-template <class Container>
-    void MyStringCompare(Container& c, const vector<MyString>& lookups){
-        Container* c2 = &c;  // just a workaround template arguments deduction fail.
-        for (const MyString& s : lookups){
-            lookup(*c2, s);
-        }
-    } 
         
 template <class Container>
     Container parseCSV_MyString(const string& path, double portion){
@@ -561,8 +508,8 @@ template <class Container>
         Container c;
         while(!infile.eof()){
             getline(infile,line);
-            MyString* lineS = new MyString(line);
-            c.push_back(*lineS);
+            // MyString* lineS = new MyString(line);
+            c.push_back(MyString(line));
             }
         random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
         typename Container::const_iterator first = c.begin();
@@ -588,8 +535,70 @@ template <class C>
         return c;
     }
 
-/////////////////////////////////////////////////////// FUNCTIONS FOR MyString COMPARE END /////////////////////////////////////////////////
+/////////////////// FUNCTIONS FOR MyString COMPARE END ///////////////////
 
+////////////////// FUNCTIONS FOR KeyDometMyString64 COMPARE /////////////
+
+vector<KeyDometMyString64> getInputFromParsedAndUnparsed_KeyDometMyString64
+(size_t keysNum, const vector<string>& parsed);
+
+void KeyDometMyString64Compare(set<KeyDometMyString64>& c,
+ const vector<KeyDometMyString64>& lookups);
+
+void buildContainerMyString(set<MyString>& container, const vector<string>& input);
+
+vector<MyString> getInputFromParsedAndUnparsedMyString(size_t keysNum, const vector<string>& parsed);
+
+void MyStringCompare(set<MyString>& c, const vector<MyString>& lookups);
+
+// template<template<class, typename...> class Container,
+//             typename... Args>
+//     bool lookup(Container<KeyDometMyString64, Args...>& s, const KeyDometMyString64& key)
+//     {
+//         auto iter = s.find(key);
+//         return iter != s.end();
+//     }
+        
+// template <class Container>
+//     Container parseCSV_KeyDometMyString64(const string& path, double portion){
+//         string line; 
+//         ifstream infile(path.c_str());
+//         if(infile.fail()) {
+//             __throw_invalid_argument("can't open file - maybe path is wrong?");
+//         }
+//         Container c;
+//         while(!infile.eof()){
+//             getline(infile,line);
+//             // KeyDometMyString64* lineS = new KeyDometMyString64(line);
+//             c.push_back(KeyDometMyString64(line));
+//             }
+//         random_shuffle(c.begin(), c.end()); // TODO: Oren is this OK for the purpose of the benchmark?
+//         typename Container::const_iterator first = c.begin();
+//         typename Container::const_iterator last = c.begin() + (c.size()*portion);
+//         Container newC(first, last);
+//         random_shuffle(newC.begin(), newC.end());
+//         return c;
+//     }
+
+// template<template<class, typename...> class Container,
+//             typename... ContainerArgs>
+//     void buildContainer(Container<KeyDometMyString64, ContainerArgs...>& container, 
+//         const vector<KeyDometMyString64>& input)
+//     {
+//         transform(input.begin(), input.end(), std::inserter(container, container.begin()), 
+//             [](const KeyDometMyString64& str) {
+//             return str;
+//         });
+//     }
+
+// template <class C>
+//     C buildContainerWrapper(const vector<KeyDometMyString64>& input){
+//         C c;
+//         buildContainer(c, input);
+//         return c;
+//     }
+
+/////////////////// FUNCTIONS FOR KeyDometMyString64 COMPARE END ///////////////////
 
 // template <typename C>
 // size_t containerMemoryUsage(const C& c);

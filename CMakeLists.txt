@@ -28,12 +28,12 @@ find_package(Threads REQUIRED)
 find_package(Boost)
 find_package(Math)
 
-include_directories(. include ${Boost_INCLUDE_DIRS})
+include_directories(. include ${Boost_INCLUDE_DIRS} "/opt/intel2/vtune_amplifier/include/")
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF) 
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g -L/opt/intel2/vtune_amplifier/lib64/ -littnotify")
 
 if (Sanitize)
   set(CMAKE_CXX_FLAGS "-fsanitize=address -fsanitize=undefined ${CMAKE_CXX_FLAGS}")
