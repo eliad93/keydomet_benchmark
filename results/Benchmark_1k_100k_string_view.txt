@@ -1,0 +1,26 @@
+Benchmark                                                                                                   Time           CPU Iterations
+-----------------------------------------------------------------------------------------------------------------------------------------
+BM_generated<set<string>>/100000/1024                                                                54814773 ns   54811386 ns         10
+BM_generated<set<KeyDometStr64>>/100000/1024                                                         59786851 ns   59782693 ns         12
+BM_generated<set<KeyDometStr64,std::less<>>>/100000/1024                                             36292210 ns   36289434 ns         19
+BM_parsed_data<set<string>>/100000/1024                                                             122817410 ns  122809989 ns          6
+BM_parsed_data<set<KeyDometStr64>>/100000/1024                                                       88542689 ns   88536362 ns          8
+BM_parsed_data<set<KeyDometStr64,std::less<>>>/100000/1024                                           83984353 ns   83977801 ns          8
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/100000/1024                       63691010 ns   63686768 ns         11
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/100000/1024                44175807 ns   44172758 ns         15
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64,std::less<>>>/100000/1024    41124101 ns   41121191 ns         17
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/100000/1024                     123954304 ns  123946835 ns          6
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/100000/1024               92783211 ns   92777633 ns          8
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/100000/1024   84897555 ns   84891114 ns          8
+BM_generated<set<string>>/1000/1024                                                                    132744 ns     132735 ns       5406
+BM_generated<set<KeyDometStr64>>/1000/1024                                                             148185 ns     148175 ns       4762
+BM_generated<set<KeyDometStr64,std::less<>>>/1000/1024                                                  72401 ns      72397 ns       9826
+BM_parsed_data<set<string>>/1000/1024                                                                  689825 ns     689778 ns       1006
+BM_parsed_data<set<KeyDometStr64>>/1000/1024                                                           508910 ns     508874 ns       1413
+BM_parsed_data<set<KeyDometStr64,std::less<>>>/1000/1024                                               419021 ns     418996 ns       1655
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000/1024                           765378 ns     765324 ns        913
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000/1024                    523051 ns     523019 ns       1238
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000/1024        458037 ns     458003 ns       1523
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000/1024                          757237 ns     757183 ns        906
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000/1024                   555205 ns     555166 ns       1327
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000/1024       452478 ns     452450 ns       1540
