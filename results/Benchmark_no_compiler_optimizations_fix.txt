@@ -9,3 +9,12 @@ BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::le
 BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000000/1024                     275556685 ns  275486054 ns          3
 BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000000/1024              274715917 ns  274644975 ns          3
 BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000000/1024  265170877 ns  265100982 ns          3
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000/1024                          2105649 ns    2105052 ns        328
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000/1024                   2097717 ns    2097565 ns        337
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000/1024       2094444 ns    2093846 ns        331
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/100000/1024                      136692021 ns  136649762 ns          5
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/100000/1024               133914983 ns  133871716 ns          5
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64,std::less<>>>/100000/1024   132796530 ns  132757010 ns          5
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<string>>/1000000/1024                     136399883 ns  136360952 ns          5
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/1000000/1024              132799280 ns  132759201 ns          5
+BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000000/1024  128978253 ns  128937776 ns          5
