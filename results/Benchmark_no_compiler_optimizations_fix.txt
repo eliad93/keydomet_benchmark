@@ -1,0 +1,11 @@
+Benchmark                                                                                                    Time           CPU Iterations
+------------------------------------------------------------------------------------------------------------------------------------------
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000/1024                          2089954 ns    2089785 ns        333
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000/1024                   2086507 ns    2085920 ns        328
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000/1024       2096321 ns    2095728 ns        339
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/100000/1024                      266105983 ns  266036489 ns          3
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/100000/1024               265971765 ns  265901575 ns          3
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/100000/1024   261060253 ns  260984531 ns          3
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000000/1024                     275556685 ns  275486054 ns          3
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000000/1024              274715917 ns  274644975 ns          3
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000000/1024  265170877 ns  265100982 ns          3
