@@ -12,4 +12,5 @@ BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64>>/100000
 BM_90_percent_parsed_data_10_percent_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000000/1024   42377120 ns   42374113 ns         16
 BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<string>>/1000000/1024                     160183357 ns  160172128 ns          5
 BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64>>/1000000/1024              133678476 ns  133668708 ns          7
-BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000000/1024  114652920 ns  114644857 ns          6
+BM_90_percent_parsed_data_5050_parsed_unparsed_lookups<set<KeyDometStr64,std::less<>>>/1000000/1024   92875652 ns   92869329 ns          8
+
